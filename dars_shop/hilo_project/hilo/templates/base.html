@@ -1,0 +1,124 @@
+{% load static %}
+<!doctype html>
+<html lang="zxx">
+    <head>
+        <!-- Required Meta Tags -->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% include 'components/_styles.html' %}
+
+        <title>Hilo Shop</title>
+        <style>
+            .success{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #1bfc07;
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                font-size: 16px;
+                padding-left: 900px;
+                border-radius: 5px;
+               
+    
+    
+            }
+            .warning{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: yellow;
+                font-family: Arial, Helvetica, sans-serif;
+                color: rgb(0, 0, 0);
+                font-size: 16px;
+                padding-left: 900px;
+                border-radius: 5px;
+               
+    
+    
+            }
+            .success{
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                overflow: hidden;
+                background-color: #1bfc07;
+                font-family: Arial, Helvetica, sans-serif;
+                color: white;
+                font-size: 16px;
+                padding-left: 900px;
+                border-radius: 5px;
+               
+    
+    
+            }
+            .xatolik{
+                
+                    color: red;
+                    font-size: 20px;
+                    margin-right: 10px;
+                    cursor: pointer;
+                    transition: color 0.3s ease;
+                    &:hover{
+                        color: rgb(150, 42, 42);
+                    }
+    
+                
+            }
+        </style>
+    
+    </head>
+    <body>
+        <!-- Pre Loader -->
+        {% include 'components/_loader.html' %}
+        
+        <!-- End Pre Loader -->
+
+        <!-- Top Header Start -->
+        {% include 'components/_header.html' %}
+        
+        <!-- Top Header End -->
+
+        <!-- Start Navbar Area -->
+        {% include 'components/_navbar.html' %}
+        
+        <!-- End Navbar Area -->
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+
+        <!-- Banner Area -->
+        {% if request.path == '/' %}
+        {% include 'components/_banner.html' %}
+        {% else %}
+        {% include 'components/_inner_banner.html' %}
+        {% endif %}
+
+        
+        
+        
+        <!-- Banner Area End -->
+
+        {% block content %}
+
+        {% endblock content %}
+
+
+        <!-- Footer Area -->
+        {% include 'components/_footer.html' %}
+       
+        <!-- Footer Area End -->
+
+        {% include 'components/_scripts.html' %}
+
+
+    </body>
+</html>
