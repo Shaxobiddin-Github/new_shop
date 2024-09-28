@@ -70,35 +70,41 @@
                                   </a>
                                   <a>
                                     <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1">Remove</button>
+                                    <button onclick="change_input()"  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1"><i class="fas fa-pen" ></i> Edit Data </button>
+                                    
+                                    
                                   </a>
                                 </div>
 
                                 <div class="account-form">
-                                    <form>
+                                    <form method="post">
+                                      {% csrf_token %}
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="text"  class="form-control" placeholder="Megan">
+                                                    <input name="first_name" id="update_first_name" type="text"  class="form-control" placeholder="{{ request.user.first_name }}" disabled>
+                                                    
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="text"  class="form-control" placeholder="Fox">
+                                                    <input name="last_name" id="update_last_name" type="text"  class="form-control" placeholder="{{request.user.last_name}}"  disabled>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="email"  class="form-control" placeholder="megan@hello.com">
+                                                    <input name="email" id="update_email" type="email"  class="form-control" placeholder="{{request.user.email}}" disabled>
                                                 </div>
                                             </div>
 
                                             <div class="col-lg-12">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" placeholder="+501-529-1747">
+                                                    <input name="phone_number" id="update_phone_number" type="text" class="form-control" placeholder="{{request.user.phone_number}}">
                                                 </div>
                                             </div>
+                                            <button id="save_button" type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-primary ms-1" hidden="hidden">Save</button>
                                         </div>
                                     </form>
                                 </div>
@@ -170,3 +176,32 @@
   </section>
 
 {% endblock content %}
+
+
+{% block scripts %}
+<script>
+  // const first_name = document.getElementById("update_first_name");
+  // first_name.onclick
+  function change_input(){
+    const first_name = document.getElementById("update_first_name");
+    first_name.removeAttribute('disabled');
+    first_name.style.border = "2px solid black"
+
+    const last_name = document.getElementById("update_last_name");
+    last_name.style.border = "2px solid black"
+    last_name.removeAttribute('disabled');
+
+    const email = document.getElementById("update_email");
+    email.removeAttribute('disabled');
+    email.style.border = "2px solid black"
+
+    const phone_number = document.getElementById("update_phone_number");
+    phone_number.removeAttribute('disabled');
+    phone_number.style.border = "2px solid black"
+
+    const save_button = document.getElementById("save_button");
+    save_button.removeAttribute('hidden');
+    
+  }
+</script>
+{% endblock scripts %}

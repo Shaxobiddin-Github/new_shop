@@ -85,8 +85,17 @@ class ProfileView(View):
     def get(self, request):
         return render(request, 'profile.html')
     
-    def post(self, request):
-        return render(request, 'profile.html')
+    def post(self, request:WSGIRequest):
+        if request.user.is_authenticated:
+            user = request.user
+            user.first_name = request.POST['first_name']
+            user.last_name = request.POST['last_name']
+            user.email = request.POST['email']
+            user.phone_number = request.POST['phone_number']
+            user.save()
+        return redirect('profile')
+
+
     
 
 class UpdateProfileImageView(LoginRequiredMixin, View):
