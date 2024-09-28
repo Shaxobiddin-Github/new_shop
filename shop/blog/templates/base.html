@@ -70,19 +70,25 @@
         }.user-area {
     padding-top: 100px;
     padding-bottom: 70px;
-    background-color: #f9f9f9; /* Yengil fon rangi */
+    background-image: url("https://daryo.uz/static/2018/01/masters-of-landscape-photography.jpg"); /* Yengil fon rangi */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .container {
-    max-width: 800px;
-    margin: 0 auto;
+    
+    backdrop-filter: blur(10px);
 }
 
 .user-width {
-    background: #09af6a; /* Forma orqa fon rangi */
+    background: 2px solid white; /* Forma orqa fon rangi */
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Yengil soyali effekt */
     padding: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 .user-form h2 {
@@ -97,10 +103,16 @@
 }
 
 .form-control {
-    width: 100%;
+    width: 50%;
     padding: 12px;
-    border: 1px solid #ccc; /* Chekka rangi */
-    border-radius: 5px;
+    border: 1px solid #ffffff; /* Chekka rangi */
+    border-radius: 20px;
+    transition: border-color 0.3s;
+    box-sizing: border-box; /* Belgilash uchun kenglikni qiling */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Yengil soyali effekt */
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 255, 255, 0.7);
     transition: border-color 0.3s;
 }
 
@@ -123,11 +135,11 @@
 }
 
 .default-btn {
-    background-color: #00ff22; /* Tugma rangi */
-    color: #ffffff; /* Matn rangi */
+    background-color: #03e9f4; /* Tugma rangi */
+    color: #050505; /* Matn rangi */
     padding: 12px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 20px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s;
@@ -135,11 +147,11 @@
 }
 
 .default-btn:hover {
-    background-color: #0056b3; /* Hover holati uchun rangi */
+    background-color: #1aec2c59; /* Hover holati uchun rangi */
 }
 
 .forget {
-    color: #09ff00; /* "Forgot My Password?" matni rangi */
+    color: #ff0000; /* "Forgot My Password?" matni rangi */
     text-decoration: none; /* Qattiq chiziqni olib tashlash */
 }
 
@@ -147,6 +159,46 @@
     text-decoration: underline; /* Hover holatida ostki chiziq qo'shish */
 }
 
+/* Tugma animatsiyasi uchun qo'shimchalar */
+.btn:before {
+    animation: rotate 2s infinite linear;
+    filter: blur(20px);
+}
+
+.btn.btninner {
+    position: relative;
+    display: flex;
+    width: 100%;
+    z-index: 1;
+    transition: all 0.18s ease;
+    backdrop-filter: blur(40px);
+    backface-visibility: hidden;
+}
+
+button:hover{
+    background: #03e9f4;
+    color: #050801;
+    box-shadow: 0 0 5px  #03e9f4, 0 0 25px #03e9f4, 0 0 50px #03e9f4, 0 0 200px #03e9f4;
+    -webkit-box-reflect: below 1px
+    linear-gradient(transparent,   #0005)
+}
+
+.account-form{
+    margin-top: 100px;
+    margin-bottom: 100px;
+
+    
+}
+.account-tab-item{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    background-image: url("https://uzbaza.uz/wp-content/uploads/2021/07/qish-sabogi.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
     </style>
 </head>
 

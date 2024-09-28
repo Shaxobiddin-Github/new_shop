@@ -4,6 +4,8 @@ from django.core.handlers.wsgi import WSGIRequest
 from django.contrib.auth import login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required,login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 
 from .forms import RegisterForm,LoginForm
@@ -11,6 +13,7 @@ from .forms import RegisterForm,LoginForm
 
 
 class HomeView(View):
+    # @login_required(login_url="login.html")
     def get(self,request):
         return render(request, 'main/index.html')
 
@@ -59,6 +62,7 @@ class LoginView(View):
                 user=login_form.get_user()
                 login(request,user)
                 messages.success(request, f"saytga xush kelibsiz {user.username}")
+                print(user.username,user.password  )
                 return redirect('home')
         return render(request, 'login.html')
             
@@ -74,3 +78,28 @@ class LogoutView(View):
         logout(request)
         messages.warning(request, "Siz saytdan muvaffaqiyatli chiqdingiz!!")
         return redirect('login')
+
+
+class ProfileView(View):
+
+    def get(self, request):
+        return render(request, 'profile.html')
+    
+    def post(self, request):
+        return render(request, 'profile.html')
+    
+
+class UpdateProfileImageView(LoginRequiredMixin, View):
+    def post(self, request):
+        if 'image' in request.FILES:
+            image = request.FILES['image']
+            if image.name.endswith(('.jpg', '.jpeg', '.png')):
+                user = request.user
+                user.image = image
+                user.save()
+                messages.success(request, 'Profil rasmi o\'zgartirildi!')
+            else:
+                messages.error(request, 'Noto\'g\'ri fayl formati. JPG, JPEG yoki PNG formatidagi rasmni tanlang.')
+                return redirect('profile')
+        messages.error(request, 'Rasmni yuklashda xato!')
+        return redirect('profile')
