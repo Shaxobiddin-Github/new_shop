@@ -1,10 +1,11 @@
 from django.shortcuts import render,redirect
 from django.views.generic import View
 from django.core.handlers.wsgi import WSGIRequest 
-from django.contrib.auth import login, logout
+from django.contrib.auth import login, logout, aauthenticate
 from django.contrib import messages
 from django.contrib.auth.decorators import permission_required,login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.forms import PasswordChangeForm
 
 # Create your views here.
 
@@ -112,3 +113,29 @@ class UpdateProfileImageView(LoginRequiredMixin, View):
                 return redirect('profile')
         messages.error(request, 'Rasmni yuklashda xato!')
         return redirect('profile')
+
+
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.views import View
+
+from django.contrib.auth import update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib import messages
+from django.shortcuts import redirect
+from django.views import View
+
+class CustomerChangePassword(View):
+    def post(self, request):
+        form = PasswordChangeForm(request.user, data=request.POST)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user) 
+            messages.success(request, 'Sizning parolingiz o\'zgartirildi!')
+            return redirect('profile')
+        else:
+            for error in form.errors.values():
+                messages.error(request, error)
+            return redirect('profile')  
