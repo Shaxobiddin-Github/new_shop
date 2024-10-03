@@ -3,7 +3,8 @@ from django.urls import path
 from django.contrib.auth.views import (PasswordResetView,
                                        PasswordResetDoneView,
                                        PasswordResetConfirmView,
-                                       PasswordResetCompleteView)
+                                       PasswordResetCompleteView,
+                                       )
 
 from .views import *
 
@@ -21,6 +22,8 @@ urlpatterns = [
     path('reset/<uidb64>/<token>', PasswordResetView.as_view(), name ='password_reset_confirm'),
     path('reset-password-done/', PasswordResetDoneView.as_view(), name ='password_reset_done'),
     path('reset-password-complate/', PasswordResetCompleteView.as_view(), name ='password_reset_complate'),
-    # path('my_addresses/', MyAddressesView.as_view(), name ='my_addresses'),
+    path('add-to-cart/<int:product_id>/', Add_to_cart_View.as_view(), name ='cart'),
+    path('product-details/', ProductDetailView.as_view(),  name ='product_detail'),
+    
 
 ]

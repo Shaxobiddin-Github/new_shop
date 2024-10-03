@@ -139,3 +139,16 @@ class CustomerChangePassword(View):
             for error in form.errors.values():
                 messages.error(request, error)
             return redirect('profile')  
+
+
+class ProductDetailView(View):
+    def get(self, request):
+        # Your code here
+        return render(request, 'main/product_detail.html')
+
+
+
+
+class Add_to_cart_View(View):
+    def get(self, request, product_id):
+        return redirect('product_detail', product_id)
